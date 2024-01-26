@@ -1,8 +1,6 @@
-
-
 export const renderPokemons = async () => {
     try {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon?offset=20&limit=20")
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon?offset=50&limit=50")
         if(!response.ok) throw Error("Pokemons not found!!")
         const datas = await response.json()
         const arrayOfPokemon = []
@@ -21,30 +19,30 @@ export const renderPokemons = async () => {
     }
 }
 
-
-
-
 export const randomPokemon = async () => {
     try {
         const randomPokemon = await renderPokemons()
         const responce = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokemon}`)
         const data = await responce.json()
-        const ul = document.querySelector("#pokedex")
+        const ul = document.querySelector("#poke")
         const li = document.createElement('li')
         const img = document.createElement("img")
         const h2 = document.createElement("h2")
         const button = document.createElement("button")
+        const div = document.querySelector('#pokedex')
+    
         li.setAttribute("class", "pokemons")    
-        img.src = data["sprites"].back_default
+        img.src = data["sprites"].front_default
         button.dataset.pokemonId = randomPokemon
         h2.textContent = randomPokemon
 
         li.append(img)
         li.append(h2)
-        ul.append(li)
-        document.body.append(ul)
+        ul.appendChild(li)
+        div.append(ul)
+        document.body.append(div)
 
-    
+            
         return data;
     }
     catch (error) {
@@ -53,19 +51,4 @@ export const randomPokemon = async () => {
     }
 }
 
-const pokemonHandler = async (event) => {
-    const caughtPokemon = 
-    setTimeout(async () => {
-        await randomPokemon()
-    
-    }, 500)
-}
-
-export const catchPokemon = () => {
-    const grassElements = document.getElementsByClassName(".grass")
-
-    for (const grass of grassElements) {
-        grass.addEventListener("mouseover", pokemonHandler)
-    }
-   
-}
+const pokemonModal
