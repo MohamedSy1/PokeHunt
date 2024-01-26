@@ -160,3 +160,7 @@ nav > ul {
     margin-right: 10px;
   }
 }
+
+#pokemonModal {
+  padding: 5rem;
+}

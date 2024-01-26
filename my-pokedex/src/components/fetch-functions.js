@@ -7,9 +7,6 @@ export const renderPokemons = async () => {
         datas["results"].forEach((data,index) => {
             arrayOfPokemon.push(data.name)
         })
-      
-        console.log(arrayOfPokemon)
-        console.log(datas)
         const randomIndex = Math.floor(Math.random() * arrayOfPokemon.length)
         return arrayOfPokemon[randomIndex]
     }
@@ -30,10 +27,10 @@ export const randomPokemon = async () => {
         const h2 = document.createElement("h2")
         const button = document.createElement("button")
         const div = document.querySelector('#pokedex')
-    
+
         li.setAttribute("class", "pokemons")    
         img.src = data["sprites"].front_default
-        button.dataset.pokemonId = randomPokemon
+        button.dataset.pokemonId = data.id
         h2.textContent = randomPokemon
 
         li.append(img)
@@ -41,14 +38,61 @@ export const randomPokemon = async () => {
         ul.appendChild(li)
         div.append(ul)
         document.body.append(div)
-
-            
+        
         return data;
     }
     catch (error) {
-        console.log(error)
+        console.log(error.message)
         return null
     }
 }
 
-const pokemonModal
+export const pokemonStats = async () => {
+    try {
+        const pokemonData = await randomPokemon()
+        const statsArr = []
+        const pokemonStat = pokemonData['stats']
+        pokemonStat.forEach((data) => {
+            statsArr.push({
+                [data['stat'].name]: data["base_stat"]
+            })
+        })
+        return statsArr
+    }
+    catch (error) {
+        console.warn(error.message)
+        return null
+    }
+}
+
+export const pokemonModal = async () => {
+    const pokemon = await randomPokemon()
+    const pokemonStat = await pokemonStats()
+
+    const dialog = document.querySelector('#pokemonModal')
+    const div = document.createElement("div")
+    const h2 = document.createElement('h2')
+    const img = document.createElement('img')
+    const hp = document.createElement('p')
+    const attack = document.createElement('p')
+    const button = document.createElement('button')
+    const button2 = document.createElement('button')
+
+    dialog.setAttribute("class", "modal")
+    button.setAttribute('class', "close-button")
+    console.log(pokemonStat)
+    img.src = pokemon["sprites"].front_default
+    h2.textContent = pokemon.name
+    hp.textContent = `Health: ${pokemonStat[0].hp}`
+    attack.textContent = `Attack: ${pokemonStat[1].attack}`
+    button.textContent = "Catch!"
+    button2.textContent = "Abandone!"
+
+    dialog.appendChild(img)
+    dialog.appendChild(h2)
+    div.append(hp)
+    div.append(attack)
+    dialog.appendChild(div)
+    dialog.appendChild(button)
+    dialog.appendChild(button2)
+}
