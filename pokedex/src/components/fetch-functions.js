@@ -134,7 +134,7 @@ export const pokemonModal = async () => {
     const attack = document.createElement('p')
     const type = document.createElement("p")
     const weight = document.createElement("p")
-
+    const height = document.createElement("p")
     const button = document.createElement('button')
     const button2 = document.createElement('button')
     
@@ -145,6 +145,7 @@ export const pokemonModal = async () => {
 
     img.src = pokemon["sprites"].front_default
     h2.textContent = pokemon.name
+    height.textContent = `Height: ${pokemon.height}`
     weight.textContent = `Weight: ${pokemon.weight}`
     type.textContent = `Habitat: GrassLand`
     hp.textContent = `Health: ${pokemonStat[0].hp}`
@@ -156,8 +157,9 @@ export const pokemonModal = async () => {
     dialog.appendChild(h2)
     div.append(hp)
     div.append(attack)
-    div.append(type)
+    div.append(height)
     div.append(weight)
+    div.append(type)
     dialog.appendChild(div)
     dialog.appendChild(button)
     dialog.appendChild(button2)
@@ -178,7 +180,7 @@ export const rockPokemonModal = async () => {
     const attack = document.createElement('p')
     const type = document.createElement("p")
     const weight = document.createElement("p")
-
+    const height = document.createElement('p')
     const button = document.createElement('button')
     const button2 = document.createElement('button')
     
@@ -189,6 +191,7 @@ export const rockPokemonModal = async () => {
     img.src = pokemon["sprites"].front_default
     h2.textContent = pokemon.name
     weight.textContent = `Weight: ${pokemon.weight}`
+    height.textContent = `Height: ${pokemon.height}`
     type.textContent = `Habitat: caves`
     hp.textContent = `Health: ${pokemonStat[0].hp}`
     attack.textContent = `Attack: ${pokemonStat[1].attack}`
@@ -199,8 +202,9 @@ export const rockPokemonModal = async () => {
     dialog.appendChild(h2)
     div.append(hp)
     div.append(attack)
-    div.append(type)
+    div.append(height)
     div.append(weight)
+    div.append(type)
     dialog.appendChild(div)
     dialog.appendChild(button)
     dialog.appendChild(button2)
