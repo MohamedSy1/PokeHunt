@@ -3,15 +3,11 @@ import {
   renderPokemons,
   randomPokemon,
   pokemonStats,
+  rockPokemonModal,
   pokemonModal
 } from "./src/components/fetch-functions.js"
 
-// const pokemonHandler = async () => {
-//   const caughtPokemon = await randomPokemon()
-//   setTimeout(() => {
-//       return caughtPokemon
-//   }, 5000)
-// }
+let hoverTimer;
 
 const removePokemon = (event) => {
   const modal = document.querySelector("#pokemonModal")
@@ -19,7 +15,7 @@ const removePokemon = (event) => {
   const li = document.querySelector(".pokemons")
   if (event.target.classList.contains('close-button')) {
     modal.close()
-    ul.removeChild(li)
+    ul.remove(li)
   }
 }
 
@@ -35,7 +31,7 @@ const main = () => {
   document.body.addEventListener('click', removePokemon)
   document.body.addEventListener('click', addPokemon)
 
-  document.querySelectorAll('.grass, .tree').forEach(el => {
+  document.querySelectorAll('.grass, .tree, .rock').forEach(el => {
     const randomX = Math.random() * 40;
     const randomY = Math.random() * 150;
     el.style.transform = `translate(${randomX}px, ${randomY}px)`;
@@ -44,10 +40,28 @@ const main = () => {
   const grassElements = document.getElementsByClassName("grass")
   for (const grass of grassElements) {
     grass.addEventListener("mouseover", () => {
-      setTimeout(() => {
+      hoverTimer = setTimeout(() => {
         modal.showModal()
         pokemonModal()
       }, 5000)
+    })
+
+    grass.addEventListener("mouseout", () => {
+      clearTimeout(hoverTimer)
+    })
+  }
+
+  const rockElements = document.getElementsByClassName("rock")
+  for (const rock of rockElements) {
+    rock.addEventListener("mouseover", () => {
+      hoverTimer = setTimeout(() => {
+        modal.showModal()
+        rockPokemonModal()
+      }, 5000)
+    })
+
+    rock.addEventListener("mouseout", () => {
+      clearTimeout(hoverTimer)
     })
   }
 }
