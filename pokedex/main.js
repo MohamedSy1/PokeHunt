@@ -15,7 +15,7 @@ const removePokemon = (event) => {
   const li = document.querySelector(".pokemons")
   if (event.target.classList.contains('close-button')) {
     modal.close()
-    ul.remove(li)
+    ul.removeChild(li)
   }
 }
 
