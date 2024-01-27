@@ -58,7 +58,7 @@ export const randomPokemon = async () => {
 
         li.append(img)
         li.append(h2)
-        ul.appendChild(li)
+        ul.insertBefore(li, ul.firstChild)
         div.append(ul)
         document.body.append(div)
         
