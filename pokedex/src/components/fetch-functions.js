@@ -186,7 +186,6 @@ export const rockPokemonModal = async () => {
     button.setAttribute("class", "catch-button")
     button2.setAttribute('class', "close-button")
     
-
     img.src = pokemon["sprites"].front_default
     h2.textContent = pokemon.name
     weight.textContent = `Weight: ${pokemon.weight}`
