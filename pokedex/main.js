@@ -4,7 +4,8 @@ import {
   randomPokemon,
   pokemonStats,
   rockPokemonModal,
-  pokemonModal
+  pokemonModal,
+  getPokemonData,
 } from "./src/components/fetch-functions.js"
 
 let hoverTimer;
@@ -24,41 +25,6 @@ const addPokemon = (event) => {
   if (event.target.classList.contains('catch-button')) {
     modal.close()
   }
-}
-
-const getPokemonData = async (pokemonName) => {
-  const response = await fetch (`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-  const pokemonData = await response.json()
-  const pokemonStat = await pokemonStats(pokemonData) 
-
-  const ul = document.querySelector("#searchedPokemon")
-  const div = document.createElement("div")
-  const h2 = document.createElement('h2')
-  const img = document.createElement('img')
-  const hp = document.createElement('p')
-  const attack = document.createElement('p')
-  const weight = document.createElement("p")
-  const height = document.createElement("p")
-  const button = document.createElement('button')
-  const button2 = document.createElement('button')
-  
-  button.setAttribute("class", "catch-button")
-  button2.setAttribute('class', "close-button")
-  
-  img.src = pokemonData["sprites"].front_default
-  h2.textContent = pokemonData.name
-  height.textContent = `Height: ${pokemonData.height}`
-  weight.textContent = `Weight: ${pokemonData.weight}`
-  hp.textContent = `Health: ${pokemonStat[0].hp}`
-  attack.textContent = `Attack: ${pokemonStat[1].attack}`
-
-  ul.appendChild(img)
-  ul.appendChild(h2)
-  div.append(hp)
-  div.append(attack)
-  div.append(height)
-  div.append(weight)
-  ul.appendChild(div)
 }
 
 const searchForPokemon = async (e) => {
@@ -116,6 +82,6 @@ const main = () => {
 
   const form = document.querySelector("#pokemon-search-form")
   form.addEventListener('submit', searchForPokemon)
-}
+} 
 
 main();

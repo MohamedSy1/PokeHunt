@@ -1,6 +1,6 @@
 export const renderPokemons = async () => {
     try {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon-habitat/grassland/?offset=100&limit=100")
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon-habitat/grassland/?offset=200&limit=200")
         if(!response.ok) throw Error("Pokemons not found!!")
         const datas = await response.json()
         const arrayOfPokemon = []
@@ -20,7 +20,7 @@ export const renderPokemons = async () => {
 
 export const renderRockPokemons = async () => {
     try {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon-habitat/cave/?offset=100&limit=100")
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon-habitat/cave/?offset=200&limit=200")
         if(!response.ok) throw Error("Pokemons not found!!")
         const datas = await response.json()
         const arrayOfPokemon = []
@@ -51,7 +51,7 @@ export const randomPokemon = async () => {
         const div = document.querySelector('#pokedex')
 
         console.log(randomPokemon)
-        li.setAttribute("class", "pokemons")    
+        li.id = randomPokemon    
         img.src = data["sprites"].front_default
         button.dataset.pokemonId = data.id
         h2.textContent = randomPokemon
@@ -206,3 +206,38 @@ export const rockPokemonModal = async () => {
     dialog.appendChild(button)
     dialog.appendChild(button2)
 }
+
+export const getPokemonData = async (pokemonName) => {
+    const response = await fetch (`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+    const pokemonData = await response.json()
+    const pokemonStat = await pokemonStats(pokemonData) 
+  
+    const ul = document.querySelector("#searchedPokemon")
+    const div = document.createElement("div")
+    const h2 = document.createElement('h2')
+    const img = document.createElement('img')
+    const hp = document.createElement('p')
+    const attack = document.createElement('p')
+    const weight = document.createElement("p")
+    const height = document.createElement("p")
+    const button = document.createElement('button')
+    const button2 = document.createElement('button')
+    
+    button.setAttribute("class", "catch-button")
+    button2.setAttribute('class', "close-button")
+    
+    img.src = pokemonData["sprites"].front_default
+    h2.textContent = pokemonData.name
+    height.textContent = `Height: ${pokemonData.height}`
+    weight.textContent = `Weight: ${pokemonData.weight}`
+    hp.textContent = `Health: ${pokemonStat[0].hp}`
+    attack.textContent = `Attack: ${pokemonStat[1].attack}`
+  
+    ul.appendChild(img)
+    ul.appendChild(h2)
+    div.append(hp)
+    div.append(attack)
+    div.append(height)
+    div.append(weight)
+    ul.appendChild(div)
+  }
