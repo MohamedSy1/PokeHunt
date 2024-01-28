@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/png" href="./assests/logo.png"/>
+    <title>PokeSearch</title>
+</head>
+<body>
+    <div id="app">
+      <nav style="background-image: url(./assests/navbar.jpg);">
+        <h1><img src="./assests/logo.png" alt="logo" style="width: 90px;"></h1>
+        <ul>
+          <li style="color: white; background-color: black; border-radius: 10%; size: 30px; width: 10rem;"><strong><a href="./index.html">Home</a></strong></li>
+          <Li style="color: white; background-color: black; border-radius: 10%; size: 30px; width: 10rem;"><strong><a href="/">Pokedex</a></strong></Li>
+        </ul>
+      </nav>
+        <form id="pokemon-search-form">
+            <h2>PokeSearch</h2>
+            <div>
+                <label for="pokemon">PokeSearch:</label>
+                <input type="text" name="pokemon" id="pokemon-input" placeholder="Type pokemon.." style="width: 15rem; height: 1.5rem;" required>
+            </div>
+            <button type="submit" id="searchButton">search</button>
+        </form>
+        <div>
+            <ul id="searchedPokemon">
+
+            </ul>
+        </div>
+    </div>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

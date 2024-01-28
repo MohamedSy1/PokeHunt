@@ -124,9 +124,7 @@ export const pokemonModal = async () => {
     dialog.innerHTML = ""
     const pokemon = await randomPokemon()
     const pokemonStat = await pokemonStats(pokemon) 
-
-    console.log(pokemon)
-
+    
     const div = document.createElement("div")
     const h2 = document.createElement('h2')
     const img = document.createElement('img')
@@ -142,7 +140,6 @@ export const pokemonModal = async () => {
     button.setAttribute("class", "catch-button")
     button2.setAttribute('class', "close-button")
     
-
     img.src = pokemon["sprites"].front_default
     h2.textContent = pokemon.name
     height.textContent = `Height: ${pokemon.height}`
